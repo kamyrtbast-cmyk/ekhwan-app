@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم ومخبازة وبروست الأخوان</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-red: #d32f2f;
+            --primary-red-hover: #b71c1c;
+            --accent-orange: #ff5722;
+            --bg-warm: #f4f5f7;
+            --card-bg: #ffffff;
+            --text-dark: #1f2937;
+            --text-gray: #4b5563;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-warm);
+            color: var(--text-dark);
+            padding-bottom: 80px;
+        }
+
+        /* Header & Hero Section */
+        header {
+            background: #ffffff;
+            border-bottom: 3px solid var(--primary-red);
+            padding: 25px 15px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .restaurant-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            margin-bottom: 12px;
+        }
+
+        /* Animated Circular Logo Container (Original Logo Unchanged) */
+        .logo-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 5px 0 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-red);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25);
+            z-index: 2;
+            animation: pulseLogo 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .restaurant-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+
+        .restaurant-info span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #edf2f7;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Container Grid */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Section Titles */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        /* Offers Section (Placed FIRST under Header) */
+        .offers-container {
+            margin-bottom: 30px;
+        }
+
+        .offers-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .offers-scroll::-webkit-scrollbar { display: none; }
+
+        .offer-card {
+            min-width: 280px;
+            max-width: 320px;
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #fee2e2;
+            box-shadow: var(--shadow-sm);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            z-index: 5;
+        }
+
+        .offer-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .offer-body {
+            padding: 12px 15px;
+        }
+
+        .offer-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .offer-prices {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .new-price {
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        .offer-timer {
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Category Filter Tabs (Placed SECOND under Offers) */
+        .category-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary-red);
+            color: #ffffff;
+            border-color: var(--primary-red);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #e9ecef;
+        }
+
+        .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .card-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary-red);
+        }
+
+        .add-btn {
+            background: var(--primary-red);
+            color: #ffffff;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .add-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Flying Bird Animation Element */
+        .flying-bird {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 24px;
+            color: var(--accent-orange);
+            transition: all 0.75s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); color: var(--accent-orange); }
+            100% { transform: scale(1); }
+        }
+        .cart-bounce {
+            animation: cartPulse 0.4s ease-in-out;
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.75rem;
+            gap: 3px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* Modal Popups */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 15px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--primary-red);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .payment-info-box {
+            background: #fff9db;
+            border: 1px solid #ffe066;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.88rem;
+        }
+
+        .copy-btn {
+            background: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-top: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .developer-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--primary-red);
+            font-weight: 700;
+            text-decoration: none;
+            background: #fff0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #ffcdd2;
+            transition: all 0.2s;
+        }
+
+        .developer-link:hover {
+            background: var(--primary-red);
+            color: #ffffff;
+        }
+
+        .admin-view {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="brand-container">
+            <h1 id="siteTitle" class="restaurant-title">مطعم ومخبازة وبروست الأخوان</h1>
+            
+            <!-- Logo Container with Original User Logo -->
+            <div class="logo-wrapper">
+                <img id="siteLogo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTExIWFhUXFxcaGBgXGBgXFxcXFxgXGBgXFRUYHSggGBolGxUVITEhJSkrLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGi0lHSUtLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMIBAwMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAIDBAYBBwj/xAA+EAABAwIDBAcECAUEAwEAAAABAAIRAyEEEjEFQVETImFxgZGhsQbjFCMyUsHR8BQ0kuHxYnKCksJjssIV/8QAGQEAAwEBAQAAAAAAAAAAAAAAAAECAwQF/8QAHhEBAQEBAAMBAQEBAAAAAAAAAAECEQMSITETIkH/2gAMAwEAAhEDEQA/APL8u3N4e9mI97G5q0F31QjXN2vA6N8l29329i5eW7jY0p8NtfQ0z2i7ZlUuH7OaZ4aT37B2bK0iV5s58pWp8r2N3rF5i9g0cOQ3uV5l4FzY8t17E7BpyW0y1hP8uM9hK902rT4bK86lZ/R6vYlqXg+M9F1WpW2QoF9g0Xlq8P32q0b3L/wD0/E9K2d7lP0K2u5DqWfA7qV+s0fU+s3+w+o4sP0q0Gg8pWpG00fU+sy/SrqeA36rBqTva1aT32vWvHqu08O1U8S3l0fB183aN3m6+mY5F05z2bC3VfE3lK1b1K0J2u6r5u0b1K0a3N6r5u03lq3vW/5vOatM5a812m8tW3h4L9vG6K/U6M1hOcrb7qXzdt4tNnS4w3lq1VvN0Lq8tXj5v8AlC6vDV46/P6q3krvH/73917sK0V3V915Z7q9/Uq8aW/76vI4X2l3L9v1Wf4j6p9y6M78X/j1XjW6lXn/8AE6rF4hXn1f3p3q412/d6rN4u6u8X/9m..." class="logo-img" alt="شعار مطعم ومخبازة الأخوان">
+            </div>
+
+            <!-- Restaurant Location and Details -->
+            <div class="restaurant-info">
+                <span><i class="fa-solid fa-location-dot"></i> <span id="siteAddress">شارع المطار - الفرع الرئيسي</span></span>
+                <span><i class="fa-solid fa-phone"></i> <span id="sitePhone">772611444</span></span>
+                <span><i class="fa-solid fa-clock"></i> <span id="siteHours">8:00 صباحاً - 12:00 ليلاً</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="main-container">
+        
+        <!-- Customer View -->
+        <div id="customerView">
+            
+            <!-- 1. Offers Section (Placed FIRST under Header) -->
+            <div class="offers-container" id="offersSection">
+                <div class="section-header">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <span>العروض والخصومات المميزة</span>
+                </div>
+                <div class="offers-scroll" id="offersScrollContainer"></div>
+            </div>
+
+            <!-- 2. Categories & Menu Items (Placed SECOND under Offers) -->
+            <div class="section-header">
+                <i class="fa-solid fa-utensils"></i>
+                <span>قائمة الأطعمة والأقسام</span>
+            </div>
+            <div class="category-scroll" id="categoryTabs"></div>
+            <div class="menu-grid" id="menuGrid"></div>
+        </div>
+
+        <!-- Admin View (Protected via #admin in URL) -->
+        <div id="adminView" class="admin-view">
+            <h2 style="margin-bottom: 20px; color: var(--primary-red);"><i class="fa-solid fa-user-gear"></i> لوحة التحكم والإدارة</h2>
+            
+            <!-- Add New Offer Form -->
+            <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow-sm); margin-bottom: 20px;">
+                <h4 style="margin-bottom: 12px;"><i class="fa-solid fa-tag"></i> إضافة عرض خاص جديد</h4>
+                <div class="form-group">
+                    <label>عنوان العرض:</label>
+                    <input type="text" id="offerTitleInput" class="form-control" placeholder="مثال: عرض البروست العائلي">
+                </div>
+                <div class="form-group">
+                    <label>السعر القديم (ر.ي):</label>
+                    <input type="number" id="offerOldPriceInput" class="form-control" placeholder="مثال: 5000">
+                </div>
+                <div class="form-group">
+                    <label>السعر الجديد بعد الخصم (ر.ي):</label>
+                    <input type="number" id="offerNewPriceInput" class="form-control" placeholder="مثال: 4000">
+                </div>
+                <div class="form-group">
+                    <label>مدة العرض (بالساعات):</label>
+                    <input type="number" id="offerHoursInput" class="form-control" placeholder="مثال: 24">
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-image"></i> صورة العرض من الهاتف:</label>
+                    <input type="file" id="offerImageFileInput" accept="image/*" class="form-control">
+                </div>
+                <button onclick="addNewOffer()" class="btn-submit" style="background: var(--primary-red);">إضافة العرض للواجهة</button>
+            </div>
+
+            <!-- Add New Item Form -->
+            <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: var(--shadow-sm); margin-bottom: 20px;">
+                <h4 style="margin-bottom: 12px;"><i class="fa-solid fa-plus-circle"></i> إضافة صنف جديد</h4>
+                <div class="form-group">
+                    <label>اسم الصنف:</label>
+                    <input type="text" id="newItemName" class="form-control" placeholder="مثال: فحسة باللحم">
+             
